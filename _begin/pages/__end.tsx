@@ -2,9 +2,10 @@ import Image from "next/image";
 import { useState } from "react";
 import Tony from "../public/tony.jpeg";
 import Sam from "../public/sam.jpeg";
+import { createGlobalState } from "react-hooks-global-state";
 
 export default function Page() {
-  const [isShowingNewComment, setIsShowingNewComment] = useState(false);
+  let [isShowingNewComment, setIsShowingNewComment] = useState(false);
 
   return (
     <div className="max-w-lg py-8 px-4">
@@ -66,7 +67,13 @@ export default function Page() {
   );
 }
 
-function NewComment({ onCancel }: { onCancel: () => void }) {
+let { useGlobalState } = createGlobalState({
+  draftComments: {} as any,
+});
+
+function NewComment({ onCancel } = { onCancel: () => {} }) {
+  let [draftComments, setDraftComments] = useGlobalState("draftComments");
+
   return (
     <div>
       <div className="mt-6 flex">
@@ -83,7 +90,12 @@ function NewComment({ onCancel }: { onCancel: () => void }) {
           </div>
           <div className="space-y-4 p-2 text-sm">
             <textarea
-              className="w-full rounded border border-gray-300 bg-gray-50"
+              className="w-full rounded border border-gray-300 bg-gray-50 p-3"
+              placeholder="Leave a comment"
+              value={draftComments["1"] || ""}
+              onChange={(e) =>
+                setDraftComments({ ...draftComments, "1": e.target.value })
+              }
               name=""
               id=""
               rows={6}
@@ -91,14 +103,17 @@ function NewComment({ onCancel }: { onCancel: () => void }) {
           </div>
         </div>
       </div>
-      <div className="mt-4 flex justify-end space-x-3">
+      <div className="mt-4 flex justify-end space-x-1">
         <button
           onClick={onCancel}
           className="rounded border border-gray-300 bg-gray-100 px-4 py-1 text-sm font-semibold text-gray-600 hover:bg-gray-200"
         >
           Cancel
         </button>
-        <button className="rounded border border-green-600 bg-green-500 px-4 py-1 text-sm font-semibold text-white hover:bg-green-600">
+        <button
+          onClick={() => alert(draftComments["1"])}
+          className="rounded border border-green-600 bg-green-500 px-4 py-1 text-sm font-semibold text-white hover:bg-green-600"
+        >
           Comment
         </button>
       </div>
