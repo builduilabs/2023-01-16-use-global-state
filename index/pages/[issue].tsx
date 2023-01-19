@@ -1,13 +1,10 @@
-import NewComment, { useGlobalState } from "@/components/new-comment";
+import NewComment from "@/components/new-comment";
 import Image from "next/image";
 import { useState } from "react";
 import Tony from "../public/tony.jpeg";
 
 export default function Issue({ issue }: any) {
-  let [draftComments] = useGlobalState("draftComments");
-  let [isShowingNewComment, setIsShowingNewComment] = useState(
-    draftComments[issue.id]
-  );
+  let [isShowingNewComment, setIsShowingNewComment] = useState(false);
 
   return (
     <div>
@@ -47,10 +44,7 @@ export default function Issue({ issue }: any) {
       </div>
 
       {isShowingNewComment ? (
-        <NewComment
-          issueId={issue.id}
-          onCancel={() => setIsShowingNewComment(false)}
-        />
+        <NewComment onCancel={() => setIsShowingNewComment(false)} />
       ) : (
         <div className="mt-6 text-right">
           <button
