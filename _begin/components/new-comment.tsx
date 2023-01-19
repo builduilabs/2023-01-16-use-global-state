@@ -7,7 +7,7 @@ export default function NewComment({
 }: {
   onCancel: () => void;
 }) {
-  let [draftComment, setDraftComment] = useState("");
+  let [text, setText] = useState("");
 
   return (
     <div>
@@ -27,8 +27,8 @@ export default function NewComment({
             <textarea
               className="w-full rounded border border-gray-300 bg-gray-50 p-3"
               placeholder="Leave a comment"
-              value={draftComment}
-              onChange={(e) => setDraftComment(e.target.value)}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
               name=""
               id=""
               rows={6}
@@ -44,7 +44,7 @@ export default function NewComment({
           Cancel
         </button>
         <button
-          onClick={() => alert(draftComment)}
+          onClick={() => alert(text)}
           className="rounded border border-green-600 bg-green-500 px-4 py-1 text-sm font-semibold text-white hover:bg-green-600"
         >
           Comment

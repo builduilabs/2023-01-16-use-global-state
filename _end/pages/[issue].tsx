@@ -7,7 +7,7 @@ export default function Issue({ issue }: any) {
   let [isShowingNewComment, setIsShowingNewComment] = useState(false);
 
   return (
-    <div key={issue.id}>
+    <div>
       <div className="border-b pb-2">
         <h1 className="text-xl font-medium">{issue.title}</h1>
         <div className="mt-1 flex items-center space-x-2">
