@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </NavLink>
       </header>
 
-      <div className="mt-4 max-w-lg px-4" key={pageProps.issue.id}>
+      <div className="mt-4 max-w-lg px-4">
         <Component {...pageProps} />
       </div>
     </div>
