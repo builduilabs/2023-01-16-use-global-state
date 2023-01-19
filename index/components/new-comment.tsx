@@ -1,13 +1,23 @@
 import Image from "next/image";
-import { useState } from "react";
+import { createGlobalState } from "react-hooks-global-state";
 import Sam from "../public/sam.jpeg";
 
+const { useGlobalState } = createGlobalState<{
+  draftComments: Record<string, string>;
+}>({
+  draftComments: {},
+});
+
+export { useGlobalState };
+
 export default function NewComment({
+  issueId,
   onCancel = () => {},
 }: {
+  issueId: string;
   onCancel: () => void;
 }) {
-  let [text, setText] = useState("");
+  let [draftComments, setDraftComments] = useGlobalState("draftComments");
 
   return (
     <div>
@@ -27,8 +37,13 @@ export default function NewComment({
             <textarea
               className="w-full rounded border border-gray-300 bg-gray-50 p-3"
               placeholder="Leave a comment"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
+              value={draftComments[issueId]}
+              onChange={(e) =>
+                setDraftComments({
+                  ...draftComments,
+                  [issueId]: e.target.value,
+                })
+              }
               name=""
               id=""
               rows={6}
@@ -44,7 +59,7 @@ export default function NewComment({
           Cancel
         </button>
         <button
-          onClick={() => alert(text)}
+          onClick={() => alert(draftComments[issueId])}
           className="rounded border border-green-600 bg-green-500 px-4 py-1 text-sm font-semibold text-white hover:bg-green-600"
         >
           Comment
