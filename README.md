@@ -2,8 +2,8 @@
 # Preserving draft comments with useGlobalState
 
 - [View the diff from video](https://github.com/builduilabs/2023-01-16-use-global-state/commit/bdd0b903749e91eed18b38ade98d0952f4330f75)
-- [View the starting code](./__begin.js)
-- [View the ending code](./__end.js)
+- [View the starting code](./__begin)
+- [View the ending code](./__end)
 
 ## Running the demo locally
 
