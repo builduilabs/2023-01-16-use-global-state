@@ -1,10 +1,13 @@
-import NewComment from "@/components/new-comment";
+import NewComment, { useGlobalState } from "@/components/new-comment";
 import Image from "next/image";
 import { useState } from "react";
 import Tony from "../public/tony.jpeg";
 
 export default function Issue({ issue }: any) {
-  let [isShowingNewComment, setIsShowingNewComment] = useState(false);
+  let [draftComments] = useGlobalState("draftComments");
+  let [isShowingNewComment, setIsShowingNewComment] = useState(
+    !!draftComments[issue.id]
+  );
 
   return (
     <div>

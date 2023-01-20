@@ -2,11 +2,13 @@ import Image from "next/image";
 import { createGlobalState } from "react-hooks-global-state";
 import Sam from "../public/sam.jpeg";
 
-let { useGlobalState } = createGlobalState<{
+const { useGlobalState } = createGlobalState<{
   draftComments: Record<string, string>;
 }>({
   draftComments: {},
 });
+
+export { useGlobalState };
 
 export default function NewComment({
   issueId,
